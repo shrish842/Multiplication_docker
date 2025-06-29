@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Multiplication App</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .container { background: #f5f5f5; padding: 30px; border-radius: 10px; }
+        input { padding: 10px; margin: 5px; font-size: 16px; }
+        button { padding: 12px 20px; background: #007cba; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #005a87; }
+        .result { background: #e8f5e8; padding: 15px; border-radius: 5px; margin-top: 20px; }
+        .error { background: #ffe8e8; color: #d00; padding: 15px; border-radius: 5px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Multiplication Calculator</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <label>First Number:</label><br>
+                <input type="number" step="any" name="num1" placeholder="Enter first number" required>
+            </div>
+            <div>
+                <label>Second Number:</label><br>
+                <input type="number" step="any" name="num2" placeholder="Enter second number" required>
+            </div>
+            <div>
+                <button type="submit">Multiply</button>
+            </div>
+        </form>
+        
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+        
+        {% if calculated %}
+            <div class="result">
+                <h3>Result:</h3>
+                <p><strong>{{ num1 }} × {{ num2 }} = {{ result }}</strong></p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
